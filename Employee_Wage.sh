@@ -10,7 +10,7 @@ WORKING_HOUR=100
 
 day=0
 hour=0
-function getEmployeeWage() {
+function getWorkHours() {
 
 case $1 in
    $IS_FUll_TIME ) empHours=8 ;;
@@ -23,7 +23,7 @@ while [[ $day -lt $WORKING_DAY && $hour -lt $WORKING_HOUR ]]
 do
 ((day++))
 
-	workHours="$( getEmployeeWage $((RANDOM%3)) )"
+	workHours="$( getWorkHours $((RANDOM%3)) )"
 	employeeWage=$(($WAGE_PER_HOUR+$workHours))
 	totalWage=$(($totalWage+$employeeWage))
 	echo "Employee Wage:"$totalWage
