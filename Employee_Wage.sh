@@ -11,7 +11,6 @@ WORKING_HOUR=100
 day=0
 hour=0
 function getWorkHours() {
-
 case $1 in
    $IS_FUll_TIME ) empHours=8 ;;
    $IS_PART_TIME ) empHours=4 ;;
@@ -19,15 +18,23 @@ case $1 in
    esac
 echo $empHours
 }
-while [[ $day -lt $WORKING_DAY && $hour -lt $WORKING_HOUR ]]
+function calculateDailyWage() {
+	local workHrs=$1
+	wage=$(($workHrs*$WAGE_PER_HOUR))
+	echo $wage
+}
+
+
+while [[ $day -lt $WORKING_DAY && $workHours -le $WORKING_HOUR ]]
 do
 ((day++))
 
 	workHours="$( getWorkHours $((RANDOM%3)) )"
-	employeeWage=$(($WAGE_PER_HOUR+$workHours))
-	totalWage=$(($totalWage+$employeeWage))
-	echo "Employee Wage:"$totalWage
-	echo "$hour: Hour $day: Day"
-	echo "workhours" $workHours
-done
+	DailyWage=$(($WAGE_PER_HOUR*$workHours))
+	totalWage=$(($totalWage+$DailyWage))
+	employeeDailWage[$day]="$( calculateDailyWage $workHours )"
 
+done
+	echo "workhours" $workHours
+	echo "Employee Total Wage:"$totalWage
+	echo "Employee Daily Wage " ${employeeDailWage[@]}
