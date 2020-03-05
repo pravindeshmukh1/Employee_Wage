@@ -38,3 +38,4 @@ done
 	echo "workhours" $workHours
 	echo "Employee Total Wage:"$totalWage
 	echo "Employee Daily Wage " ${employeeDailWage[@]}
+	echo "Employee Day " ${!employeeDailWage[@]}
